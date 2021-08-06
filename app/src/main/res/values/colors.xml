@@ -22,7 +22,8 @@
         <color name="comment_box_background_color">@color/white</color>
         <color name="fragment_background_color">@color/white</color>
 
-        <color name="home_background_color">@color/purple_200</color>
+        <color name="home_background_color">@color/purple_500</color>
+        <color name="search_background_color">@color/purple_200</color>
 
 
 
