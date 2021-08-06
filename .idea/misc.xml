@@ -3,8 +3,10 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/drawable-v24/ic_search.xml" value="0.2203125" />
+        <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/drawable/bg_search.xml" value="0.2203125" />
         <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/layout/activity_main.xml" value="0.12771739130434784" />
-        <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/layout/fragment_home.xml" value="0.12952898550724637" />
+        <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/layout/fragment_search.xml" value="0.12952898550724637" />
         <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/layout/no_internet_layout.xml" value="0.33" />
       </map>
