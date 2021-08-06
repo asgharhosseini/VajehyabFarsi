@@ -10,6 +10,6 @@ class SearchRepositoryImpl(private val api: ApiService):SearchRepository {
         safeApiCall { api.getWord(query,filter) }
 
 
-    override suspend fun getSearchVajeh(query: String, filter: String): Resource<VajehResponse> =
-        safeApiCall { api.getSearchVajeh(query,filter) }
+    override suspend fun getSearchVajeh(query: String): Resource<VajehResponse> =
+        safeApiCall { api.getSearchVajeh(query) }
 }
