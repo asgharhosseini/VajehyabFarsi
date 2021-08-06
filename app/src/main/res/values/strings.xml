@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">VajehyabFarsi</string>
+    <string name="no_connection">ارتباط برقرار نشد</string>
+    <string name="no_internet_description">متاسفانه ارتباط بین دستگاه شما و واژیاب برقرار نشد.<br/> دوباره تلاش کنید</string>
+    <string name="try_again">تلاش مجدد</string>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 </resources>
