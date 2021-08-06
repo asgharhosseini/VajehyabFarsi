@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="16sp"
-            android:text="واژه مورد نظر را جستجو کنید ..."
+            android:text="@string/search_box_hint"
             android:layout_gravity="center"/>
 
 
