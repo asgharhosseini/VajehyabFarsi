@@ -1,5 +1,6 @@
 package ir.ah.vajehyabfarsi.ui.fragment.search
 
+import android.util.*
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.*
 import ir.ah.vajehyabfarsi.base.*
@@ -17,7 +18,8 @@ class SearchViewModel @Inject constructor(
     private val searchRepository: SearchRepository,
 ) : BaseViewModel(mainCoroutineDispatcher) {
     val searchQuery: MutableStateFlow<String> = MutableStateFlow("")
-    val filter: MutableStateFlow<String> = MutableStateFlow("dehkhoda")
+    val filter: MutableStateFlow<String> = MutableStateFlow("")
+
     private val searchEventChannel = Channel<SearchEvent>()
     val searchEvent = searchEventChannel.receiveAsFlow()
 
@@ -25,6 +27,7 @@ class SearchViewModel @Inject constructor(
     val searchResponse = searchResponseChannel.receiveAsFlow()
 
     fun validateSearchQuery() {
+
         val searchQuery = searchQuery.value
         val filter = filter.value
         doInMain {
@@ -33,15 +36,18 @@ class SearchViewModel @Inject constructor(
                 return@doInMain
             }
 
-            getSearchVajeh(searchQuery,filter)
+            getSearchVajeh()
             return@doInMain
         }
     }
 
-    private fun getSearchVajeh(searchQuery:String,filter:String)= doInMain {
-        searchResponseChannel.send(Resource.Loading)
-        searchResponseChannel.send(searchRepository.getSearchVajeh(searchQuery,filter))
-
+    fun getSearchVajeh() {
+        val searchQuery = this.searchQuery.value
+        val filter = this.filter.value
+        doInMain {
+            searchResponseChannel.send(Resource.Loading)
+            searchResponseChannel.send(searchRepository.getWord(searchQuery, filter))
+        }
     }
 }
 
