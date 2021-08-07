@@ -8,5 +8,5 @@ import retrofit2.http.*
 
 interface SearchRepository {
     suspend fun  getWord(query:String,filter:String):Resource<VajehResponse>
-    suspend  fun  getSearchVajeh(query:String):Resource<VajehResponse>
+    suspend  fun  getSearchVajeh(query:String,filter:String):Resource<VajehResponse>
 }
