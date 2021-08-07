@@ -8,7 +8,7 @@ data class Response(
     @Json(name = "code")
     val code: Int,
     @Json(name = "state")
-    val state: Any,
+    val state: Any?,
     @Json(name = "status")
     val status: Boolean
 )
