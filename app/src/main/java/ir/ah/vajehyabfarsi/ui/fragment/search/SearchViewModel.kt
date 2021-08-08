@@ -4,9 +4,12 @@ import android.util.*
 import androidx.lifecycle.*
 import dagger.hilt.android.lifecycle.*
 import ir.ah.vajehyabfarsi.base.*
+import ir.ah.vajehyabfarsi.data.model.*
 import ir.ah.vajehyabfarsi.data.model.response.*
 import ir.ah.vajehyabfarsi.other.wrapper.*
 import ir.ah.vajehyabfarsi.repository.*
+import ir.ah.vajehyabfarsi.repository.history.*
+import ir.ah.vajehyabfarsi.repository.search.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
 import kotlinx.coroutines.flow.*
@@ -15,7 +18,8 @@ import javax.inject.*
 @HiltViewModel
 class SearchViewModel @Inject constructor(
     val mainCoroutineDispatcher: CoroutineDispatcher,
-    private val searchRepository: SearchRepository,
+    private val repository: SearchRepository,
+    private val historyRepository: HistoryRepository
 ) : BaseViewModel(mainCoroutineDispatcher) {
     val searchQuery: MutableStateFlow<String> = MutableStateFlow("")
     val filter: MutableStateFlow<String> = MutableStateFlow("")
@@ -37,8 +41,12 @@ class SearchViewModel @Inject constructor(
             }
 
             getSearchVajeh()
+
             return@doInMain
         }
+    }
+    fun insertVajehHistory()=doInMain {
+        historyRepository.insertVajehHistory(History(title = searchQuery.value,filter = filter.value))
     }
 
     fun getSearchVajeh() {
@@ -46,9 +54,15 @@ class SearchViewModel @Inject constructor(
         val filter = this.filter.value
         doInMain {
             searchResponseChannel.send(Resource.Loading)
-            searchResponseChannel.send(searchRepository.getWord(searchQuery, filter))
+            searchResponseChannel.send(repository.getWord(searchQuery, filter))
         }
     }
+
+    fun insertVajeh(vajeh: Vajeh) = doInMain { repository.insertVajeh(vajeh) }
+    fun deleteItem(id: String) = doInMain { repository.deleteItem(id) }
+
+
+
 }
 
 
