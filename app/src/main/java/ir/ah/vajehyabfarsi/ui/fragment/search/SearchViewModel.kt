@@ -41,9 +41,12 @@ class SearchViewModel @Inject constructor(
             }
 
             getSearchVajeh()
-            historyRepository.insertVajehHistory(History(title = searchQuery,filter = filter))
+
             return@doInMain
         }
+    }
+    fun insertVajehHistory()=doInMain {
+        historyRepository.insertVajehHistory(History(title = searchQuery.value,filter = filter.value))
     }
 
     fun getSearchVajeh() {
