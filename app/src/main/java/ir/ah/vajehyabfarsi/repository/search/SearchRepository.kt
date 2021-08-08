@@ -1,4 +1,4 @@
-package ir.ah.vajehyabfarsi.repository
+package ir.ah.vajehyabfarsi.repository.search
 
 import androidx.lifecycle.*
 import ir.ah.vajehyabfarsi.data.model.*

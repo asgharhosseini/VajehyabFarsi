@@ -4,7 +4,7 @@ import dagger.*
 import dagger.hilt.*
 import dagger.hilt.components.*
 import ir.ah.vajehyabfarsi.data.remot.*
-import ir.ah.vajehyabfarsi.repository.*
+import ir.ah.vajehyabfarsi.repository.search.*
 import javax.inject.*
 
 @InstallIn(SingletonComponent::class)

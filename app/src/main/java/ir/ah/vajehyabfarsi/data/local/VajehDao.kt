@@ -12,14 +12,22 @@ interface VajehDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertVajeh(vajeh: Vajeh)
 
-    @Query("DELETE FROM vajeh WHERE id =:id")
+    @Query("DELETE FROM Vajeh WHERE id =:id")
     suspend fun deleteItem(id: String)
 
-    @Query("SELECT * FROM vajeh")
+    @Query("SELECT * FROM  Vajeh")
     fun getAllFavorite(): Flow<List<Vajeh>>
 
-    @Query("SELECT EXISTS (SELECT 1 FROM vajeh  WHERE id = :id)")
+    @Query("SELECT EXISTS (SELECT 1 FROM Vajeh  WHERE id = :id)")
     fun checkVajehsFavorite(id: String): LiveData<Boolean>
 
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertVajehHistory(vajeh: History)
+
+    @Query("SELECT * FROM History")
+    fun getAllHistory(): Flow<List<History>>
+
+    @Query("DELETE FROM history where id NOT IN (SELECT id from history ORDER BY id DESC LIMIT 10)")
+    suspend fun deleteItemHistory(id: String)
 
 }

@@ -1,13 +1,12 @@
-package ir.ah.vajehyabfarsi.repository
+package ir.ah.vajehyabfarsi.repository.search
 
 import androidx.lifecycle.*
-import androidx.room.*
 import ir.ah.vajehyabfarsi.data.local.*
-import ir.ah.vajehyabfarsi.data.model.*
 import ir.ah.vajehyabfarsi.data.model.response.*
 import ir.ah.vajehyabfarsi.data.remot.*
 import ir.ah.vajehyabfarsi.other.util.*
 import ir.ah.vajehyabfarsi.other.wrapper.*
+import ir.ah.vajehyabfarsi.repository.search.*
 import kotlinx.coroutines.flow.*
 
 class SearchRepositoryImpl(
