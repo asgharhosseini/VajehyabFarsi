@@ -14,9 +14,9 @@ interface HistoryDao {
     suspend fun insertVajehHistory(vajeh: History)
 
     @Query("SELECT * FROM History")
-    fun getAllHistory(): Flow<List<History>>
+    fun getAllHistory(): LiveData<List<History>>
 
-    @Query("DELETE  FROM history where id NOT IN (SELECT * from history ORDER BY id DESC LIMIT 10)")
+    @Query("DELETE  FROM History where id NOT IN (SELECT id from History ORDER BY id DESC LIMIT 10)")
     suspend fun deleteItemHistory()
 
 }
