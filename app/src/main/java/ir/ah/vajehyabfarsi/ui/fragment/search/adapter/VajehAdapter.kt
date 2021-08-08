@@ -14,11 +14,13 @@ class VajehAdapter:BaseAdapter<Vajeh, VajehAdapter.VajehViewHolder>() {
 
         fun bind(vajeh: Vajeh) {
             binding.apply {
-                textView.text=vajeh.text
-                imageView2.setOnClickListener {
+                title.text=vajeh.title
+                source.text=vajeh.source
+                text.text=vajeh.text
+                bookmarkBorder.setOnClickListener {
                     vajehEventListener?.onFavorite(vajeh)
                 }
-                imageView2.setOnClickListener {
+                bookmark.setOnClickListener {
                     vajehEventListener?.onRemoveFavorite(vajeh)
                 }
 
