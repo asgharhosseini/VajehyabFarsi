@@ -25,10 +25,12 @@ object DatabaseModule {
     }
 
     @Provides
+    @Singleton
     fun provideVajehDao(vajehDatabase: VajehDatabase): VajehDao {
         return vajehDatabase.vajehDao()
     }
     @Provides
+    @Singleton
     fun provideHistoryDao(vajehDatabase: VajehDatabase): HistoryDao {
         return vajehDatabase.historyDao()
     }
