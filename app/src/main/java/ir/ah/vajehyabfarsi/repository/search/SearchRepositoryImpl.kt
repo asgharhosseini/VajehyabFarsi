@@ -8,10 +8,11 @@ import ir.ah.vajehyabfarsi.other.util.*
 import ir.ah.vajehyabfarsi.other.wrapper.*
 import ir.ah.vajehyabfarsi.repository.search.*
 import kotlinx.coroutines.flow.*
+import javax.inject.*
 
-class SearchRepositoryImpl(
+class SearchRepositoryImpl @Inject constructor(
     private val api: ApiService,
-    private val database:VajehDao
+    private val database:VajehDao,
 ) : SearchRepository {
     override suspend fun getWord(query: String, filter: String): Resource<VajehResponse> =
         safeApiCall { api.getWord(query, filter) }
