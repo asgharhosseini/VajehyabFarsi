@@ -26,6 +26,10 @@ object DatabaseModule {
 
     @Provides
     fun provideVajehDao(vajehDatabase: VajehDatabase): VajehDao {
-        return vajehDatabase.orderDao()
+        return vajehDatabase.vajehDao()
+    }
+    @Provides
+    fun provideHistoryDao(vajehDatabase: VajehDatabase): HistoryDao {
+        return vajehDatabase.historyDao()
     }
 }
