@@ -1,5 +1,6 @@
 package ir.ah.vajehyabfarsi.repository.history
 
+import androidx.lifecycle.*
 import ir.ah.vajehyabfarsi.data.local.*
 import ir.ah.vajehyabfarsi.data.model.*
 import kotlinx.coroutines.flow.*
@@ -11,7 +12,7 @@ class HistoryRepositoryImpl @Inject constructor(private val database:HistoryDao)
         database.deleteItemHistory()
     }
 
-    override fun getAllHistory(): Flow<List<History>> =database.getAllHistory()
+    override fun getAllHistory(): LiveData<List<History>> =database.getAllHistory()
 
 
 }
