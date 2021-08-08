@@ -2,35 +2,54 @@ package ir.ah.vajehyabfarsi.ui.fragment.search.adapter
 
 import android.view.*
 import androidx.recyclerview.widget.*
-import androidx.viewbinding.*
+import ir.ah.vajehyabfarsi.*
 import ir.ah.vajehyabfarsi.base.*
+import ir.ah.vajehyabfarsi.data.local.*
 import ir.ah.vajehyabfarsi.data.model.response.*
 import ir.ah.vajehyabfarsi.databinding.*
+import kotlinx.coroutines.flow.*
+import javax.inject.*
 
-class VajehAdapter:BaseAdapter<Vajeh, VajehAdapter.VajehViewHolder>() {
+class VajehAdapter @Inject constructor(private val database: VajehDao) :
+    BaseAdapter<Vajeh, VajehAdapter.VajehViewHolder>() {
+    private var favoriteEventListener: FavoriteEventListener? = null
 
-    private var vajehEventListener:VajehEventListener?=null
-   inner class VajehViewHolder(private val binding: ItemVajehBinding) : RecyclerView.ViewHolder(binding.root){
+    inner class VajehViewHolder(private val binding: ItemVajehBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bind(vajeh: Vajeh) {
+         fun bind(vajeh: Vajeh) {
             binding.apply {
-                title.text=vajeh.title
-                source.text=vajeh.source
-                text.text=vajeh.text
-                bookmarkBorder.setOnClickListener {
-                    vajehEventListener?.onFavorite(vajeh)
+                title.text = vajeh.title
+                source.text = vajeh.source
+                text.text = vajeh.text
+                var bookmarkFlag = false
+                database.checkVajehsFavorite(vajeh.id).observeForever {
+                    if (it) {
+                        binding.bookmark.setImageResource(R.drawable.ic_bookmark)
+                        bookmarkFlag = it
+                    } else {
+                        binding.bookmark.setImageResource(R.drawable.ic_bookmark_border)
+                        bookmarkFlag = it
+                    }
                 }
-                bookmark.setOnClickListener {
-                    vajehEventListener?.onRemoveFavorite(vajeh)
+                binding.bookmark.setOnClickListener {
+                    favoriteEventListener?.onFavorite(vajeh, position, bookmarkFlag)
+                    if (bookmarkFlag) {
+                        binding.bookmark.setImageResource(R.drawable.ic_bookmark)
+
+                    } else {
+                        binding.bookmark.setImageResource(R.drawable.ic_bookmark_border)
+                        bookmarkFlag = false
+                    }
                 }
+
+
 
             }
         }
 
     }
-    fun setOnOrderItemEventListener(vajehEventListener:VajehEventListener) {
-        this.vajehEventListener = vajehEventListener
-    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): VajehViewHolder {
         val binding = ItemVajehBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return VajehViewHolder(binding)
@@ -41,8 +60,11 @@ class VajehAdapter:BaseAdapter<Vajeh, VajehAdapter.VajehViewHolder>() {
         holder.bind(currentItem)
     }
 
-    interface VajehEventListener {
-        fun onFavorite(vajeh: Vajeh)
-        fun onRemoveFavorite(vajeh: Vajeh)
+    interface FavoriteEventListener {
+        fun onFavorite(vajeh: Vajeh, position: Int, flag: Boolean)
+    }
+
+    fun setOnFavoriteItemEventListener(favoriteEventListener: FavoriteEventListener) {
+        this.favoriteEventListener = favoriteEventListener
     }
 }

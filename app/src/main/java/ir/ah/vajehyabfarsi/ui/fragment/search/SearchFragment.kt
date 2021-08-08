@@ -16,16 +16,17 @@ import ir.ah.vajehyabfarsi.other.util.Constance.filterName
 import ir.ah.vajehyabfarsi.other.wrapper.*
 import ir.ah.vajehyabfarsi.ui.fragment.search.adapter.*
 import kotlinx.coroutines.flow.*
+import javax.inject.*
 
 
 @AndroidEntryPoint
 class SearchFragment :
     BaseFragment<SearchViewModel>(R.layout.fragment_search, SearchViewModel::class),
-VajehAdapter.VajehEventListener{
+    VajehAdapter.FavoriteEventListener {
     private val binding by viewBinding(FragmentSearchBinding::bind)
 
-    private val vajehAdapter by lazy { VajehAdapter() }
-
+    @Inject
+    lateinit var vajehAdapter : VajehAdapter
 
 
     override fun observeData() {
@@ -47,15 +48,18 @@ VajehAdapter.VajehEventListener{
 
     private fun onClickItem() {
         binding.btnSearch.setOnClickListener {
-          vm.validateSearchQuery()
+            vm.validateSearchQuery()
 
         }
     }
+
     private fun setUpVajehdapter() {
         vajehAdapter.setOnItemClickListener { }
+        vajehAdapter.setOnFavoriteItemEventListener(this)
         binding.recyclerView.apply {
             adapter = vajehAdapter
-            layoutManager=LinearLayoutManager(requireContext(),LinearLayoutManager.VERTICAL,false)
+            layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
         }
     }
 
@@ -94,8 +98,8 @@ VajehAdapter.VajehEventListener{
                     is Resource.Loading -> {
                     }
                     is Resource.Success -> {
-                    vajehAdapter.submitList(event.success.data.results)
-                        Log.e(TAG,event.success.data.results[0].title)
+                        vajehAdapter.submitList(event.success.data.results)
+                        Log.e(TAG, event.success.data.results[0].title)
                     }
                     is Resource.Failure -> {
                     }
@@ -104,12 +108,8 @@ VajehAdapter.VajehEventListener{
         }
     }
 
-    override fun onFavorite(vajeh: Vajeh) {
-
-    }
-
-    override fun onRemoveFavorite(vajeh: Vajeh) {
-
+    override fun onFavorite(vajeh: Vajeh, position: Int, flag: Boolean) {
+        if (flag) vm.deleteItem(vajeh.id) else vm.insertVajeh(vajeh)
     }
 
 
