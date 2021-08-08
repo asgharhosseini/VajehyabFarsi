@@ -8,6 +8,7 @@ import ir.ah.vajehyabfarsi.data.model.*
 import ir.ah.vajehyabfarsi.data.model.response.*
 import ir.ah.vajehyabfarsi.other.wrapper.*
 import ir.ah.vajehyabfarsi.repository.*
+import ir.ah.vajehyabfarsi.repository.history.*
 import ir.ah.vajehyabfarsi.repository.search.*
 import kotlinx.coroutines.*
 import kotlinx.coroutines.channels.*
@@ -18,6 +19,7 @@ import javax.inject.*
 class SearchViewModel @Inject constructor(
     val mainCoroutineDispatcher: CoroutineDispatcher,
     private val repository: SearchRepository,
+    private val historyRepository: HistoryRepository
 ) : BaseViewModel(mainCoroutineDispatcher) {
     val searchQuery: MutableStateFlow<String> = MutableStateFlow("")
     val filter: MutableStateFlow<String> = MutableStateFlow("")
@@ -39,6 +41,7 @@ class SearchViewModel @Inject constructor(
             }
 
             getSearchVajeh()
+            historyRepository.insertVajehHistory(History(title = searchQuery,filter = filter))
             return@doInMain
         }
     }
@@ -54,8 +57,7 @@ class SearchViewModel @Inject constructor(
 
     fun insertVajeh(vajeh: Vajeh) = doInMain { repository.insertVajeh(vajeh) }
     fun deleteItem(id: String) = doInMain { repository.deleteItem(id) }
-    fun getAllFavorite(): Flow<List<Vajeh>> = repository.getAllFavorite()
-    fun checkVajehsFavorite(id: String): LiveData<Boolean> = repository.checkVajehsFavorite(id)
+
 
 
 }
