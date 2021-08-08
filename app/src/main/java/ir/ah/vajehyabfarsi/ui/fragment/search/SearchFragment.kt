@@ -49,7 +49,7 @@ class SearchFragment :
     private fun onClickItem() {
         binding.btnSearch.setOnClickListener {
             vm.validateSearchQuery()
-
+            vm.insertVajehHistory()
         }
     }
 
@@ -100,6 +100,7 @@ class SearchFragment :
                     is Resource.Success -> {
                         vajehAdapter.submitList(event.success.data.results)
                         Log.e(TAG, event.success.data.results[0].title)
+
                     }
                     is Resource.Failure -> {
                     }
