@@ -39,7 +39,7 @@ class SearchFragment :
         setUpFilterAdapter()
         onClickItem()
         binding.etSearch.afterTextChanged { it ->
-            vm.searchQuery.value = it
+            vm.searchQuery.value = it.trim()
             binding.btnSearch.isEnabled = it.count { it.isDigit() } < 1
         }
         setUpVajehdapter()
