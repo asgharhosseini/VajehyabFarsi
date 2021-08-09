@@ -15,6 +15,6 @@ interface SearchRepository {
 
     suspend fun insertVajeh(vajeh: Vajeh)
     suspend fun deleteItem(id: String)
-    fun getAllFavorite(): Flow<List<Vajeh>>
+    fun getAllFavorite(): LiveData<List<Vajeh>>
     fun checkVajehsFavorite(id: String): LiveData<Boolean>
 }

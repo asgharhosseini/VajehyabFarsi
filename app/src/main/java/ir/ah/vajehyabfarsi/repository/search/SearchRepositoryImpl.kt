@@ -24,7 +24,7 @@ class SearchRepositoryImpl @Inject constructor(
 
     override suspend fun insertVajeh(vajeh: Vajeh)=database.insertVajeh(vajeh)
     override suspend fun deleteItem(id: String)=database.deleteItem(id)
-    override fun getAllFavorite(): Flow<List<Vajeh>> =database.getAllFavorite()
+    override fun getAllFavorite(): LiveData<List<Vajeh>> =database.getAllFavorite()
     override fun checkVajehsFavorite(id: String): LiveData<Boolean> =database.checkVajehsFavorite(id)
 
 

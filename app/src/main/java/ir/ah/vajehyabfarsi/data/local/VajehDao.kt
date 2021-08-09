@@ -16,7 +16,7 @@ interface VajehDao {
     suspend fun deleteItem(id: String)
 
     @Query("SELECT * FROM  Vajeh")
-    fun getAllFavorite(): Flow<List<Vajeh>>
+    fun getAllFavorite(): LiveData<List<Vajeh>>
 
     @Query("SELECT EXISTS (SELECT 1 FROM Vajeh  WHERE id = :id)")
     fun checkVajehsFavorite(id: String): LiveData<Boolean>

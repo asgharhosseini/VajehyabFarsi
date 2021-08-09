@@ -1,8 +1,11 @@
 package ir.ah.vajehyabfarsi.ui.fragment.home
 
+import android.view.*
+import android.widget.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.*
 import androidx.recyclerview.widget.*
+import com.google.android.material.snackbar.*
 import dagger.hilt.android.*
 import ir.ah.vajehyabfarsi.*
 import ir.ah.vajehyabfarsi.R
@@ -52,7 +55,27 @@ class HomeFragment :
         binding.searchBox.setOnClickListener {
             findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToSearchFragment(null))
         }
+        binding.menu.setOnClickListener {
 
+            showPopMenu(it)
+        }
+
+    }
+
+    private fun showPopMenu(view: View?) {
+        val popup = PopupMenu(requireContext(), view)
+        val inflater: MenuInflater = popup.getMenuInflater()
+        inflater.inflate(R.menu.favorite_menu, popup.getMenu())
+        popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.inFavorite -> {
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFavoriteFragment())
+                }
+            }
+            true
+        })
+
+        popup.show()
     }
 
     override fun onDelete(history: History, position: Int) {

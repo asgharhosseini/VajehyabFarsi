@@ -6,7 +6,10 @@
         <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/drawable-v24/bg_search_box.xml" value="0.2203125" />
         <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/drawable-v24/ic_search.xml" value="0.2203125" />
         <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/drawable/bg_search.xml" value="0.2203125" />
+        <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/drawable/ic_more.xml" value="0.22447916666666667" />
+        <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/font/app_font.xml" value="0.234375" />
         <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/layout/activity_main.xml" value="0.12771739130434784" />
+        <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/layout/fragment_favorite.xml" value="0.20833333333333334" />
         <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/layout/fragment_home.xml" value="0.22" />
         <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/layout/fragment_search.xml" value="0.25" />
         <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/layout/item_history.xml" value="0.20416666666666666" />
@@ -14,6 +17,7 @@
         <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/layout/item_vajeh.xml" value="0.33" />
         <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/layout/list_filer.xml" value="0.20416666666666666" />
         <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/layout/no_internet_layout.xml" value="0.33" />
+        <entry key="..\:/dev/work/android/vbile/new/VajehyabFarsi/app/src/main/res/menu/history_menu.xml" value="0.20833333333333334" />
       </map>
     </option>
   </component>
