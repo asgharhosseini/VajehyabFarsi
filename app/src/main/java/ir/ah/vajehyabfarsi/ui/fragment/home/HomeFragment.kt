@@ -67,7 +67,7 @@ class HomeFragment :
         popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener { item ->
             when (item.itemId) {
                 R.id.inFavorite -> {
-
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFavoriteFragment())
 
                 }
 
