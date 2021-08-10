@@ -6,6 +6,20 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/home_background_color">
 
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/lottieAnimationView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/rv_home"
+        app:lottie_autoPlay="true"
+        app:lottie_loop="true"
+        app:lottie_speed="0.75"
+        tools:ignore="MissingConstraints" />
+
     <ImageView
         android:id="@+id/menu"
         android:layout_width="wrap_content"
