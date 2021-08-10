@@ -131,9 +131,6 @@ class SearchFragment :
                                     isVisible=true
                                 }
                             }
-
-                        Log.e(TAG, event.success.data.results[0].title)
-
                     }
                     is Resource.Failure -> {
                         when(event.success?.response?.code){
