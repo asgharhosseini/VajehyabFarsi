@@ -2,6 +2,7 @@ package ir.ah.vajehyabfarsi.ui.fragment.search
 
 import android.util.*
 import android.widget.*
+import androidx.core.view.*
 import androidx.lifecycle.*
 import androidx.recyclerview.widget.*
 import dagger.hilt.android.*
@@ -42,6 +43,7 @@ class SearchFragment :
             vm.searchQuery.value = it.trim()
             binding.btnSearch.isEnabled = it.count { it.isDigit() } < 1
         }
+
         setUpVajehdapter()
 
     }
@@ -83,6 +85,7 @@ class SearchFragment :
                             .error = getString(R.string.search_box_empty)
                     }
                     is SearchEvent.ShowError -> {
+
                     }
 
                 }
@@ -96,13 +99,115 @@ class SearchFragment :
                 }
                 when (event) {
                     is Resource.Loading -> {
+                        binding.lottieAnimationView.apply {
+                            setAnimation(R.raw.search)
+                            isVisible=true
+                        }
+                        binding.message.apply {
+                            text=getString(R.string.Searching)
+                            isVisible=true
+                        }
                     }
                     is Resource.Success -> {
-                        vajehAdapter.submitList(event.success.data.results)
+                            if (!event.success.data.results.isNullOrEmpty()
+                                && event.success.data.results.size >0){
+                                binding.recyclerView.apply {
+                                    isVisible=true
+                                    vajehAdapter.submitList(event.success.data.results)
+                                }
+                                binding.lottieAnimationView.apply {
+                                    isVisible=false
+                                }
+                                binding.message.apply {
+                                    isVisible=false
+                                }
+                            }else{
+                                binding.lottieAnimationView.apply {
+                                    setAnimation(R.raw.error)
+                                    isVisible=true
+                                }
+                                binding.message.apply {
+                                    text=getString(R.string.The_requested_phrase_was_not_found)
+                                    isVisible=true
+                                }
+                            }
+
                         Log.e(TAG, event.success.data.results[0].title)
 
                     }
                     is Resource.Failure -> {
+                        when(event.success?.response?.code){
+                            400->{
+                                binding.lottieAnimationView.apply {
+                                    setAnimation(R.raw.error)
+                                    isVisible=true
+                                }
+                                binding.message.apply {
+                                    text=getString(R.string.The_server_is_unable_to_recognize_the_input_parameters)
+                                    isVisible=true
+                                }
+                            }
+                            401->{
+                                binding.lottieAnimationView.apply {
+                                    setAnimation(R.raw.error)
+                                    isVisible=true
+                                }
+                                binding.message.apply {
+                                    text=getString(R.string.The_developer_could_not_be_detected_by_the_server)
+                                    isVisible=true
+                                }
+                            }
+                            403->{
+                                binding.lottieAnimationView.apply {
+                                    setAnimation(R.raw.error)
+                                    isVisible=true
+                                }
+                                binding.message.apply {
+                                    text=getString(R.string.The_server_has_blocked_developer_access_for_obvious_reasons)
+                                    isVisible=true
+                                }
+                            }
+                            404->{
+                                binding.lottieAnimationView.apply {
+                                    setAnimation(R.raw.error)
+                                    isVisible=true
+                                }
+                                binding.message.apply {
+                                    text=getString(R.string.The_requested_phrase_was_not_found)
+                                    isVisible=true
+                                }
+                            }
+                            405->{
+                                binding.lottieAnimationView.apply {
+                                    setAnimation(R.raw.error)
+                                    isVisible=true
+                                }
+                                binding.message.apply {
+                                    text=getString(R.string.Method_is_not_allowed)
+                                    isVisible=true
+                                }
+                            }
+                            500->{
+                                binding.lottieAnimationView.apply {
+                                    setAnimation(R.raw.error)
+                                    isVisible=true
+                                }
+                                binding.message.apply {
+                                    text=getString(R.string.The_server_encountered_an_error_and_was_unable_to_execute_the_request)
+                                    isVisible=true
+                                }
+                            }
+                            503->{
+                                binding.lottieAnimationView.apply {
+                                    setAnimation(R.raw.error)
+                                    isVisible=true
+                                }
+                                binding.message.apply {
+                                    text=getString(R.string.The_server_is_currently_unavailable)
+                                    isVisible=true
+                                }
+                            }
+                        }
                     }
                 }
             }
