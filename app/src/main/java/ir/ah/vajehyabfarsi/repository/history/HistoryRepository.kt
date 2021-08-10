@@ -8,6 +8,6 @@ import kotlinx.coroutines.flow.*
 interface HistoryRepository {
     suspend fun insertVajehHistory(vajeh: History)
     fun getAllHistory(): LiveData<List<History>>
-
+    suspend fun deleteItemHistory(id: Int)
 
 }

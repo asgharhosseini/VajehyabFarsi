@@ -19,7 +19,8 @@ class HomeViewModel @Inject constructor(
 
 
     fun getAllHistory() =historyRepository.getAllHistory()
-
+    fun deleteItemHistory(id: Int)=doInMain { historyRepository.deleteItemHistory(id) }
+    fun insertVajehHistory(vajeh: History)=doInMain { historyRepository.insertVajehHistory(vajeh) }
 }
 
 

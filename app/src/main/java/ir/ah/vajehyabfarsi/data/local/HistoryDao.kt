@@ -19,4 +19,7 @@ interface HistoryDao {
     @Query("DELETE  FROM History where id NOT IN (SELECT id from History ORDER BY id DESC LIMIT 10)")
     suspend fun deleteItemHistory()
 
+    @Query("DELETE FROM  History WHERE id =:id")
+    suspend fun deleteItemHistory(id: Int)
+
 }
