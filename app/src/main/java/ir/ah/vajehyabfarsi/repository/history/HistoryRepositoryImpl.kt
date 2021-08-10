@@ -13,6 +13,7 @@ class HistoryRepositoryImpl @Inject constructor(private val database:HistoryDao)
     }
 
     override fun getAllHistory(): LiveData<List<History>> =database.getAllHistory()
+    override suspend fun deleteItemHistory(id: Int) =database.deleteItemHistory(id)
 
 
 }
