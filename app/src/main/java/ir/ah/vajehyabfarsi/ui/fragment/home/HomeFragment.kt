@@ -6,6 +6,7 @@ import androidx.core.view.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.*
 import androidx.recyclerview.widget.*
+import androidx.recyclerview.widget.ItemTouchHelper.*
 import com.google.android.material.snackbar.*
 import dagger.hilt.android.*
 import ir.ah.vajehyabfarsi.*
@@ -26,6 +27,30 @@ class HomeFragment :
     @Inject
     lateinit var adapterHistory: HistoryAdapter
 
+    private val itemTouchCallback = object : ItemTouchHelper.SimpleCallback(
+        0, LEFT or RIGHT
+    ) {
+        override fun onMove(
+            recyclerView: RecyclerView,
+            viewHolder: RecyclerView.ViewHolder,
+            target: RecyclerView.ViewHolder
+        ) = true
+
+        override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+            val pos = viewHolder.layoutPosition
+            val item = adapterHistory.currentList[pos]
+            vm.deleteItemHistory(item.id)
+            adapterHistory.notifyItemRemoved(pos)
+            Snackbar.make(requireView(), getString(R.string.Successfully_deleted_item), Snackbar.LENGTH_LONG).apply {
+                setAction(getString(R.string.Undo)) {
+                    vm.insertVajehHistory(item)
+                    adapterHistory.notifyDataSetChanged()
+                }
+                show()
+            }
+        }
+    }
+
     override fun observeData() {
         super.observeData()
         setUpHistoryAdapter()
@@ -35,8 +60,10 @@ class HomeFragment :
     override fun setUpViews() {
         super.setUpViews()
         onClickItem()
-
     }
+
+
+
     private fun setUpHistoryAdapter() {
         adapterHistory.setOnItemClickListener { }
         adapterHistory.setOnDeleteItemEventListener(this)
@@ -44,6 +71,7 @@ class HomeFragment :
             adapter = adapterHistory
             layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            ItemTouchHelper(itemTouchCallback).attachToRecyclerView(this)
         }
     }
 
