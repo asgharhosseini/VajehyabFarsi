@@ -17,6 +17,7 @@
     <string name="Based_on">بر اساس</string>
     <string name="Successfully_deleted_item">حذف با موفقیت انجام شد.</string>
     <string name="Undo">بازگردانی</string>
-
+    <string name="app_desc">راهکار های فنی و مهندسی ویبایل</string>
+    <string name="app_site">www.vbile.ir</string>
 
 </resources>
