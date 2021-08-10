@@ -2,6 +2,7 @@ package ir.ah.vajehyabfarsi.ui.fragment.home
 
 import android.view.*
 import android.widget.*
+import androidx.core.view.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.*
 import androidx.recyclerview.widget.*
@@ -48,7 +49,16 @@ class HomeFragment :
 
     private fun subscribeToObservers() {
         vm.getAllHistory().observe(viewLifecycleOwner, Observer {
-            adapterHistory.submitList(it)
+            if (it.size>0){
+                adapterHistory.submitList(it)
+                binding.lottieAnimationView.isVisible=false
+            }else{
+                binding.lottieAnimationView.apply {
+                    setAnimation(R.raw.start)
+                    isVisible=true
+                }
+
+            }
         })
     }
     private fun onClickItem() {

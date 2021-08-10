@@ -1,5 +1,6 @@
 package ir.ah.vajehyabfarsi.ui.fragment.favorite
 
+import androidx.core.view.*
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.*
 import androidx.recyclerview.widget.*
@@ -38,7 +39,19 @@ class FavoriteFragment : BaseFragment<FavoriteViewModel>(
 
     private fun subscribeToObserveSearch() {
         vm.getAllFavorite().observe(viewLifecycleOwner, Observer {
-            favoriteAdapter.submitList(it)
+            if (it.size>0){
+                favoriteAdapter.submitList(it)
+                binding.lottieAnimationView.apply {
+                    isVisible=false
+                }
+
+            }else{
+                binding.lottieAnimationView.apply {
+                    setAnimation(R.raw.empty)
+                    isVisible=true
+                }
+            }
+
         })
     }
 
