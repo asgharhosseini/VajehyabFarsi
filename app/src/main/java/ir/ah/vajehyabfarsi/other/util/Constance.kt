@@ -10,4 +10,8 @@ object Constance {
         "لهجه و گویش مازنی", "دیکشنری انگلیسی به فارسی", "دیکشنری عربی به فارسی", "دیکشنری فارسی به انگلیسی", "دیکشنری فارسی به عربی",
     )
     const val TAG ="debug"
+
+    const val NOTIFICATION_CHANNEL_ID = "vajehyabfarsi_channel"
+    const val NOTIFICATION_CHANNEL_NAME = "vajehyabfarsi"
+    const val NOTIFICATION_ID = 1
 }
